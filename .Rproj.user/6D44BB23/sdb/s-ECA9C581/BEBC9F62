@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(data.table)\nlibrary(tidyverse)\nlibrary(arules)\n# list to apriori\na_list <- list(c(\"a\",\"b\",\"c\"),c(\"a\",\"b\"), c(\"a\",\"b\",\"d\"), c(\"c\",\"e\"), c(\"a\",\"b\",\"d\",\"e\"))\nnames(a_list) <- paste(\"Tr\",c(1:5), sep = \"\")\ntrans1 <- as(a_list, \"transactions\")\nsummary(trans1)\nimage(trans1)\n\n# matrix\na_matrix <- matrix(c(1,1,1,0,0, 1,1,0,0,0,1,1,0,1,0,0,0,1,0,1,1,1,0,1,1), ncol = 5)\ndimnames(a_matrix) <- list(c(\"a\",\"b\",\"c\",\"d\",\"e\"),paste(\"Tr\",c(1:5), sep = \"\"))\ntrans2 <- as(a_matrix, \"transactions\")\ninspect(trans2)\n",
+    "created" : 1535003155492.000,
+    "dirty" : false,
+    "encoding" : "CP936",
+    "folds" : "",
+    "hash" : "3919871500",
+    "id" : "BEBC9F62",
+    "lastKnownWriteTime" : 1535006323,
+    "last_content_update" : 1535006323449,
+    "path" : "E:/Rworkspace/DemoR/machineLearning/Apriori_Demo.R",
+    "project_path" : "Apriori_Demo.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
