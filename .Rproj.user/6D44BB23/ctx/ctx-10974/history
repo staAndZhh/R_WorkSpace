@@ -1,0 +1,512 @@
+pamk.best <- pamk(data_ori)
+pamk.best
+pamk.best$nc
+library(cluster)
+clusplot(pam(data_ori, pamk.best$nc))
+data_ori
+scale(data_ori)
+data_ori_used <- scale(data_ori)
+data_ori_used
+pamk.best <- pamk(data_ori_used)
+pamk.best$nc
+library(cluster)
+clusplot(pam(data_ori_used, pamk.best$nc))
+data <-read.csv("C:\\Users\\hasee\\Desktop\\聚类数据_个数.csv") %>% as.data.table()
+data
+matrix(c(1,2,3,4),2,2)
+scale(matrix(c(1,2,3,4),2,2))
+data_ori_used <- scale(data_ori)
+data_ori_used
+pamk.best <- pamk(data_ori_used)
+pamk.best$nc
+library(cluster)
+clusplot(pam(data_ori_used, pamk.best$nc))
+data_ori_used
+data <-read.csv("C:\\Users\\hasee\\Desktop\\聚类数据_个数.csv") %>% as.data.table()
+data_ori <- data %>% select(购物服务便民商店.便利店:购物服务综合市场)
+data_ori
+str(data_ori)
+apply(data_ori,1,fivenum)
+apply(data_ori,2,fivenum)
+data <-read.csv("C:\\Users\\hasee\\Desktop\\聚类数据_个数.csv") %>% as.data.table()
+pamk.best <- pamk(data)
+data
+data_ori <- data %>% select(餐饮服务:购物服务综合市场)
+data_ori
+pamk.best <- pamk(data_ori)
+pamk.best$nc
+library(cluster)
+clusplot(pam(data_ori_used, pamk.best$nc))
+clusplot(pam(data_ori, pamk.best$nc))
+library(factoextra)
+library(cluster)
+library(data.table)
+library(tidyverse)
+library(fpc)
+data <-read.csv("C:\\Users\\hasee\\Desktop\\聚类数据_个数.csv") %>% as.data.table()
+data_ori <- data %>% select(购物服务便民商店.便利店:购物服务综合市场)
+data_ori
+str(data_ori)
+apply(data_ori,2,fivenum)
+data_ori_used <- scale(data_ori)
+data_ori_used
+data_ori_used
+data_initial <- data_ori_used %>% as.matrix()
+data_initial
+result<-get_clust_tendency(data_initial,40,graph = TRUE)
+result$hopkins_stat
+win.graph(width = 7,height = 7,pointsize = 8)
+set.seed(222)
+set.seed(123)
+data_initial
+gap_stat<-clusGap(data_initial,FUN = kmeans,nstart = 10,K.max = 30,B = 50)
+summary(gap_stat)
+win.graph(width = 7,height = 7,pointsize = 8)
+fviz_gap_stat(gap_stat)
+wssplot <- function(data, nc=30, seed=1234){
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:nc){
+set.seed(seed)
+wss[i] <- sum(kmeans(data, centers=i)$withinss)
+}
+plot(1:nc, wss, type="b", xlab="Number of Clusters",
+ylab="Within groups sum of squares")}
+data_initial
+data_initial
+wssplot(data_initial)
+library(factoextra)
+library(ggplot2)
+set.seed(1234)
+data_initial
+fviz_nbclust(data_initial, kmeans, method = "wss") +
+geom_vline(xintercept = 3, linetype = 2)
+fviz_nbclust(data_initial, kmeans, method = "wss")
+library(factoextra)
+library(cluster)
+library(data.table)
+library(tidyverse)
+library(fpc)
+pamk.best <- pamk(data_ori)
+data <-read.csv("C:\\Users\\hasee\\Desktop\\聚类数据_个数.csv") %>% as.data.table()
+data_ori <- data %>% select(购物服务便民商店.便利店:购物服务综合市场)
+data_ori
+data_ori_used <- scale(data_ori)
+data_ori_used
+data_initial <- (data_ori)
+data_initial
+data_initial <- data_ori_used %>% as.matrix()
+data_initial
+result<-get_clust_tendency(data_initial,40,graph = TRUE)
+result$hopkins_stat
+set.seed(234)
+gap_stat<-clusGap(data_initial,FUN = kmeans,nstart = 10,K.max = 30,B = 50)
+summary(gap_stat)
+fviz_gap_stat(gap_stat)
+pamk.best <- pamk(data_initial)
+pamk.best$nc
+library(cluster)
+clusplot(pam(data_ori, pamk.best$nc))
+install.packages("vegan")
+library(vegan)
+data_initial
+clusplot(pam(data_initial, pamk.best$nc))
+library(vegan)
+ca_clust <- cascadeKM(data_initial, 1, 10, iter = 1000)
+ca_clust$results
+calinski.best <- as.numeric(which.max(ca_clust$results[2,]))
+calinski.best
+data_initial
+data_ori
+data_ori
+ca_clust <- cascadeKM(data = data_ori, 1, 10, iter = 1000)
+ca_clust$results
+data_ori
+ca_clust <- cascadeKM(data_initial, 1, 30, iter = 1000)
+??cascadeKM
+ca_clust
+ca_clust
+ca_clust$results
+calinski.best <- as.numeric(which.max(ca_clust$results[2,]))
+calinski.best
+install.packages("apcluster")
+library(apcluster)
+ap_clust <- apcluster(negDistMat(r=2), data_ori)
+length(ap_clust@clusters)
+ap_clust <- apcluster(negDistMat(r=2), data_initial)
+length(ap_clust@clusters)
+heatmap(ap_clust)
+require(cluster)
+library(factoextra)
+fviz_nbclust(data_ori, kmeans, method = "silhouette")
+fviz_nbclust(data_initial, kmeans, method = "silhouette")
+set.seed(345)
+gap_stat<-clusGap(data_initial,FUN = kmeans,nstart = 10,K.max = 30,B = 50)
+fviz_gap_stat(gap_stat)
+m_clust <- Mclust(as.matrix(dataset), G=1:30) #聚类数目从1一直试到20
+summary(m_clust)
+m_clust <- Mclust(as.matrix(data_initial), G=1:30) #聚类数目从1一直试到20
+# bic准则
+m_clust <- Mclust(as.matrix(data_in
+library(mclust)
+library(mclust)
+m_clust <- Mclust(as.matrix(data_initial), G=1:30) #聚类数目从1一直试到20
+summary(m_clust)
+plot(m_clust,"BIC")
+plot(m_clust,"BIC")
+m_clust <- Mclust(as.matrix(data_ori), G=1:30)
+library(NBclust)
+set.seed(1234) #因为method选择的是kmeans，所以如果不设定种子，每次跑得结果可能不同
+summary(m_clust)
+plot(m_clust,"BIC")
+library(NBclust)
+set.seed(1234) #因为method选择的是kmeans，所以如果不设定种子，每次跑得结果可能不同
+nb_clust <- NbClust(data_initial, distance = "euclidean",
+min.nc=2, max.nc=15, method = "kmeans",
+index = "alllong", alphaBeale = 0.1)
+library(NBclust)
+library(Nbclust)
+install.packages("NbClust")
+set.seed(1234) #因为method选择的是kmeans，所以如果不设定种子，每次跑得结果可能不同
+nb_clust <- NbClust(data_initial, distance = "euclidean",
+min.nc=2, max.nc=15, method = "kmeans",
+index = "alllong", alphaBeale = 0.1)
+library(Nbclust)
+library(NbClust)
+library(NbClust)
+set.seed(1234) #因为method选择的是kmeans，所以如果不设定种子，每次跑得结果可能不同
+nb_clust <- NbClust(data_initial, distance = "euclidean",
+min.nc=2, max.nc=15, method = "kmeans",
+index = "alllong", alphaBeale = 0.1)
+wssplot <- function(data, nc=30, seed=1234){wss <- (nrow(data)-1)*sum(apply(data,2,var))for (i in 2:nc){set.seed(seed)wss[i] <- sum(kmeans(data, centers=i)$withinss)}plot(1:nc, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")}
+wssplot <- function(data, nc=30, seed=1234){
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:nc){
+set.seed(seed)wss[i] <- sum(kmeans(data, centers=i)$withinss)}
+plot(1:nc, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")}
+wssplot <- function(data, nc=30, seed=1234){
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:nc){
+set.seed(seed)wss[i] <- sum(kmeans(data, centers=i)$withinss)
+}
+plot(1:nc, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")
+}
+wssplot <- function(data, nc=30, seed=1234){
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:nc){
+set.seed(seed)wss[i] <- sum(kmeans(data, centers=i)$withinss)
+}
+plot(1:nc, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")
+}
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+wssplot <- function(data, nc=30, seed=1234){
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:nc){
+set.seed(seed)wss[i] <- sum(kmeans(data, centers=i)$withinss)
+}
+plot(1:nc, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")
+}
+wssplot <- function(data, nc=30, seed=1234){
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:nc){
+set.seed(seed)wss[i] <- sum(kmeans(data, centers=i)$withinss)
+}
+plot(1:nc, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")
+}
+wssplot <- function(data, nc=30, seed=1234){
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:nc){
+set.seed(seed)
+wss[i] <- sum(kmeans(data, centers=i)$withinss)
+}
+plot(1:nc, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")
+}
+wssplot(data = data_ori)
+wssplot(data = data_initial)
+library(factoextra)
+library(ggplot2)
+set.seed(12234)
+fviz_nbclust(dataset, kmeans, method = "wss")
+fviz_nbclust(data_ori, kmeans, method = "wss") +geom_vline(xintercept = 3, linetype = 2)
+fviz_nbclust(data_initial, kmeans, method = "wss")
+km.res <- kmeans(dataset,3)
+fviz_cluster(km.res, data = dataset)
+km.res <- kmeans(data_ori,3)
+fviz_cluster(km.res, data = dataset)
+fviz_cluster(km.res, data = data_ori)
+km.res <- kmeans(data_initial,3)
+fviz_cluster(km.res, data = data_initial)
+library(fpc)
+pamk.best <- pamk(data_ori)
+pamk.best$nc
+library(cluster)
+clusplot(pam(dataset, pamk.best$nc))
+clusplot(pam(data_ori, pamk.best$nc))
+pamk.best <- pamk(data_initial)
+pamk.best$nc
+library(vegan)
+ca_clust <- cascadeKM(data_ori, 1, 30, iter = 1000)
+ca_clust$results
+ca_clust$results
+calinski.best <- as.numeric(which.max(ca_clust$results[2,]))
+calinski.best
+ca_clust <- cascadeKM(data_initial, 1, 30, iter = 1000)
+ca_clust$results
+calinski.best <- as.numeric(which.max(ca_clust$results[2,]))
+calinski.best
+plot(fit, sortg = TRUE, grpmts.plot = TRUE)
+calinski<-as.data.frame(ca_clust$results[2,])
+calinski$cluster <- c(1:10)
+library(ggplot2)
+ggplot(calinski,aes(x = calinski[,2], y = calinski[,1]))+geom_line()
+library(apcluster)
+ap_clust <- apcluster(negDistMat(r=2), dataset)
+ap_clust <- apcluster(negDistMat(r=2), data_ori)
+length(ap_clust@clusters)
+require(cluster)
+library(factoextra)
+fviz_nbclust(dataset, kmeans, method = "silhouette")
+fviz_nbclust(data_ori, kmeans, method = "silhouette")
+library(factoextra)
+fviz_gap_stat(gap_clust)
+gap_clust <- clusGap(dataset, kmeans, 10, B = 500, verbose = interactive())
+gap_clust <- clusGap(data_ori, kmeans, 10, B = 500, verbose = interactive())
+library(factoextra)
+fviz_gap_stat(gap_clust)
+fviz_gap_stat(gap_clust)
+h_dist <- dist(as.matrix(dataset))
+h_clust<-hclust(h_dist)
+h_dist <- dist(as.matrix(data_ori))
+h_clust<-hclust(h_dist)
+plot(h_clust, hang = -1, labels = FALSE)
+rect.hclust(h_clust,8)
+gap_clust
+fviz_gap_stat(gap_clust)
+km_result<-kmeans(data_ori,6,nstart = 25)
+km_result
+win.graph(width = 20,height = 20,pointsize = 8)
+fviz_cluster(km_result,data_try)
+fviz_cluster(km_result,data_ori)
+win.graph(width = 20,height = 20,pointsize = 8)
+fviz_cluster(km_result,data_ori)
+km_result<-kmeans(data_ori,8,nstart = 25)
+win.graph(width = 20,height = 20,pointsize = 8)
+fviz_cluster(km_result,data_ori)
+km_result<-kmeans(data_ori,3,nstart = 25)
+win.graph(width = 20,height = 20,pointsize = 8)
+fviz_cluster(km_result,data_ori)
+wssplot <- function(data, nc=30, seed=1234){
+wss <- (nrow(data)-1)*sum(apply(data,2,var))
+for (i in 2:nc){
+set.seed(seed)
+wss[i] <- sum(kmeans(data, centers=i)$withinss)
+}
+plot(1:nc, wss, type="b", xlab="Number of Clusters",ylab="Within groups sum of squares")
+}
+wssplot(data = data_initial)
+library(factoextra)
+library(ggplot2)
+set.seed(12234)
+fviz_nbclust(data_ori, kmeans, method = "wss") +geom_vline(xintercept = 3, linetype = 2)
+km.res <- kmeans(data_initial,3)
+fviz_cluster(km.res, data = data_initial)
+library(factoextra)
+library(ggplot2)
+km.res <- kmeans(data_initial,6)
+fviz_cluster(km.res, data = data_initial)
+library(tidyverse)
+library(data.table)
+library(RMySQL)
+library(ggplot2)
+ggplot()+theme()
+con <- dbConnect(MySQL(),host="127.0.0.1",dbname="smnews",user="root",password="")
+library(tidyverse)
+library(data.table)
+library(RMySQL)
+library(ggplot2)
+con <- dbConnect(MySQL(),host="127.0.0.1",dbname="smnews",user="root",password="")
+con <- dbConnect(MySQL(),host="127.0.0.1",dbname="smnews",user="root",password="")
+library(tidyverse)
+library(data.table)
+library(RMySQL)
+library(ggplot2)
+install.packages("RMySQL")
+library(RMySQL)
+library(tidyverse)
+library(data.table)
+library(RMySQL)
+library(ggplot2)
+library(tidyverse)
+library(data.table)
+library(lubridate)
+library(arules)
+read_da <-function(name_paths,header = FALSE){
+dat  <- fread(name_paths,header = FALSE)
+return (dat)
+}
+Deal_data <- function(dat){
+deal_da <- function(da,start,end){
+str_sub(str_trim(da),start,end)
+}
+deal_qy <- function(da,index){
+re <- as.vector((str_split(str_trim(da),' ')))[[1]]
+# if_else(index==1,re[index],re[length(re)])'
+if(index==1){
+return(re[index])
+}else{
+return(re[length(re)])
+}
+}
+deal_tem <- function(da,index){
+re <- as.vector(str_extract_all(str_trim(da),'(\\d+)')[[1]])
+if_else(index==1,re[1],re[2])
+}
+deal_fengli <- function(da,index){
+re <- as.vector(str_extract_all(str_trim(da),('\\S+'))[[1]])
+return(re[index])
+}
+deal_week <- function(da){
+da <- as.character(da)
+if_else(nchar(da)==1,str_c('0',da),da)
+}
+deal_new_week <- function(da){
+da <- ymd(da)
+return(week(da))
+}
+dat[,":="(year = deal_da(V1,1,4)),]  # data
+dat[,":="(month = deal_da(V1,6,7)),]
+dat[,":="(day = deal_da(V1,9,10)),]
+dat[,":="(month = deal_da(V1,6,7)),]
+dat[,'tianqi_am':=lapply(V2,deal_qy,1),]  # qy
+dat[,'tianqi_pm':=lapply(V2,deal_qy,-1),]
+dat[,'max_tm':=lapply(V3,deal_tem,1),]  # tem
+dat[,'min_tm':=lapply(V3,deal_tem,-1),]
+dat[,'fengxiang_t':= lapply(V4,deal_fengli,1),] # fengxiang
+dat[,'fengxiang_t1':= lapply(V4,deal_fengli,3),]
+dat[,'fengli':= lapply(V4,deal_fengli,2),]
+dat[,'fengli1':= lapply(V4,deal_fengli,4),]
+dat[,'ymd':=str_c(year,month,day),] #ymds
+dat[,'week':=deal_new_week(ymd),] # newweek
+dat[,'new_week':=lapply(week,deal_week),]
+dat[,'yearweek':=str_c(year,new_week),]  # yearweek
+setnames(dat,'V5','city')
+dat[,':='(max_tm = as.numeric(max_tm),min_tm = as.numeric(min_tm)),]
+dat[,":="(ave_tm= (max_tm+min_tm)/2),]
+return(dat[,.(year,month,day,ymd,city,tianqi_am,tianqi_pm,max_tm,min_tm,fengxiang_t,fengli,yearweek,week,ave_tm),])
+}
+rm(dat_02)
+dat_02<- read_da("C:\\Users\\hasee\\Desktop\\2018678.csv")
+dat_02
+dat02 <- Deal_data(dat_02)
+dat02
+ppb <- fread('C:\\Users\\hasee\\Desktop\\ppb.txt',encoding = 'UTF-8')
+dat_new <- data.table(left_join(dat02,ppb,by='city'))
+str(dat_new)
+dat_new[is.na(area_name),,]
+dat_new[,.N,by=.(ymd)]
+dat_new[is.na(area_name),.(unique(city)),]
+fwrite(dat_new,'C:\\Users\\hasee\\Desktop\\new_da0601.csv')
+temDa <- fread('C:\\Users\\hasee\\Desktop\\new_da0601.csv',encoding = 'UTF-8')
+write.csv(temDa,'C:\\Users\\hasee\\Desktop\\new_da0601_0820.csv')
+library(tidyverse)
+library(data.table)
+library(RMySQL)
+library(TTR)
+library(lubridate)
+library(tidyverse)
+library(data.table)
+library(lubridate)
+library(arules)
+read_da <-function(name_paths,header = FALSE){
+dat  <- fread(name_paths,header = FALSE)
+return (dat)
+}
+Deal_data <- function(dat){
+deal_da <- function(da,start,end){
+str_sub(str_trim(da),start,end)
+}
+deal_qy <- function(da,index){
+re <- as.vector((str_split(str_trim(da),' ')))[[1]]
+# if_else(index==1,re[index],re[length(re)])'
+if(index==1){
+return(re[index])
+}else{
+return(re[length(re)])
+}
+}
+deal_tem <- function(da,index){
+re <- as.vector(str_extract_all(str_trim(da),'(\\d+)')[[1]])
+if_else(index==1,re[1],re[2])
+}
+deal_fengli <- function(da,index){
+re <- as.vector(str_extract_all(str_trim(da),('\\S+'))[[1]])
+return(re[index])
+}
+deal_week <- function(da){
+da <- as.character(da)
+if_else(nchar(da)==1,str_c('0',da),da)
+}
+deal_new_week <- function(da){
+da <- ymd(da)
+return(week(da))
+}
+dat[,":="(year = deal_da(V1,1,4)),]  # data
+dat[,":="(month = deal_da(V1,6,7)),]
+dat[,":="(day = deal_da(V1,9,10)),]
+dat[,":="(month = deal_da(V1,6,7)),]
+dat[,'tianqi_am':=lapply(V2,deal_qy,1),]  # qy
+dat[,'tianqi_pm':=lapply(V2,deal_qy,-1),]
+dat[,'max_tm':=lapply(V3,deal_tem,1),]  # tem
+dat[,'min_tm':=lapply(V3,deal_tem,-1),]
+dat[,'fengxiang_t':= lapply(V4,deal_fengli,1),] # fengxiang
+dat[,'fengxiang_t1':= lapply(V4,deal_fengli,3),]
+dat[,'fengli':= lapply(V4,deal_fengli,2),]
+dat[,'fengli1':= lapply(V4,deal_fengli,4),]
+dat[,'ymd':=str_c(year,month,day),] #ymds
+dat[,'week':=deal_new_week(ymd),] # newweek
+dat[,'new_week':=lapply(week,deal_week),]
+dat[,'yearweek':=str_c(year,new_week),]  # yearweek
+setnames(dat,'V5','city')
+dat[,':='(max_tm = as.numeric(max_tm),min_tm = as.numeric(min_tm)),]
+dat[,":="(ave_tm= (max_tm+min_tm)/2),]
+return(dat[,.(year,month,day,ymd,city,tianqi_am,tianqi_pm,max_tm,min_tm,fengxiang_t,fengli,yearweek,week,ave_tm),])
+}
+rm(dat_02)
+dat_02<- read_da("C:\\Users\\hasee\\Desktop\\2018678.csv")
+dat02 <- Deal_data(dat_02)
+dat_02
+ppb <- fread('C:\\Users\\hasee\\Desktop\\ppb.txt',encoding = 'UTF-8')
+dat_new <- data.table(left_join(dat02,ppb,by='city'))
+str(dat_new)
+dat_new[is.na(area_name),,]
+dat_new[,.N,by=.(ymd)]
+fwrite(dat_new,'C:\\Users\\hasee\\Desktop\\new_da0601.csv')
+temDa <- fread('C:\\Users\\hasee\\Desktop\\new_da0601.csv',encoding = 'UTF-8')
+write.csv(temDa,'C:\\Users\\hasee\\Desktop\\new_da0601_0820.csv')
+temDa <- fread('C:\\Users\\hasee\\Desktop\\new_da0601_0820.csv')
+temDa
+temDa[,.N,.(provi,month)]
+library(tidyverse)
+library(data.table)
+library(RMySQL)
+library(TTR)
+library(lubridate)
+library(devtools)
+library(tidyverse)
+library(data.table)
+library(RMySQL)
+library(TTR)
+library(lubridate)
+library(devtools)
+install.packages("Rmysql")
+install.packages("RMySQL")
+library(tidyverse)
+library(data.table)
+library(RMySQL)
+library(TTR)
+library(lubridate)
+library(devtools)
+library(tidyverse)
+library(data.table)
+library(RMySQL)
+library(TTR)
+library(lubridate)

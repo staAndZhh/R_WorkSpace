@@ -229,3 +229,7 @@ result <- cspade(data.trans,parameter = list(support=0.5))
 inspect(result)
 
 example("ruleInduction",package = 'arulesSequences')
+
+data("zaki")
+S0 <- cspade(zaki,parameter = list(support = 0.5),control = list(verbose = TRUE))
+# plotly_arules
