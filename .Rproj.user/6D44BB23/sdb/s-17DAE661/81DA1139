@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ggplot2)\n## 柱状图----\n#离散单变量的条形图，数据为原始数据：stat= 'identity'\nx <- c('A','B','C','D','E') \ny <- c(13,22,16,31,8) \ndf <- data.frame(x= x, y = y)\nggplot(data = df, mapping = aes(x = x, y = y)) + geom_bar(stat= 'identity')\n\n#离散单变量的条形图,数据为原始数据：stat= 'count'\nset.seed(1234) \nx <- sample(c('A','B','C','D'), size = 1000, replace= TRUE, prob = c(0.2,0.3,0.3,0.2)) \ny <- rnorm(1000) * 1000 \ndf = data.frame(x= x, y = y) \nggplot(data = df, mapping = aes(x = x)) + geom_bar(stat = 'count')\n\n# #离散单变量的条形图,x轴为离散型\nset.seed(1234) \nx <- sample(c(1,2,4,6,7), size = 1000, replace = TRUE,prob = c(0.1,0.2,0.2,0.3,0.2))\nggplot(data = data.frame(x = x), mapping= aes(x = x, y = ..count..)) + geom_bar(stat = 'count')\nggplot(data = data.frame(x = x), mapping = aes(x = factor(x), y = ..count..))+ geom_bar(stat = 'count') #离散型\nggplot(data = data.frame(x = x), mapping = aes(x = factor(x), y = ..count..))+ geom_bar(stat = 'count', fill = 'steelblue', colour = 'darkred') # 更改颜色\n\n# 簇状条形图：在ggplot()函数的aes()参数中将其他离散变量赋给fill参数\n# position参数表示条形图的摆放形式，默认为堆叠式(stack)，还可以是百分比的堆叠式\nx <- rep(1:5, each = 3) \ny <- rep(c('A','B','C'),times = 5) \nset.seed(1234)\nz <- round(runif(min = 10, max = 20, n = 15)) \ndf <- data.frame(x= x, y = y, z = z) \nggplot(data = df, mapping = aes(x = factor(x), y = z,fill = y)) + geom_bar(stat = 'identity', position = 'dodge')  # 分开柱状图\nggplot(data = df, mapping = aes(x = factor(x), y = z, fill = y)) + geom_bar(stat= 'identity', position = 'stack') # 堆叠柱状图\nggplot(data = df, mapping = aes(x = factor(x), y = z, fill = y)) + geom_bar(stat= 'identity', position = 'stack') + guides(fill = guide_legend(reverse= TRUE)) # 条形图的堆叠顺序与图例顺序相同\nggplot(data = df, mapping = aes(x = factor(x), y = z, fill = y)) + geom_bar(stat= 'identity', position = 'fill') # 百分比堆叠图\n\n# 更改调色方案\nggplot(data = df, mapping = aes(x = factor(x), y = z, fill = y)) + geom_bar(stat= 'identity', position = 'dodge') + scale_fill_brewer(palette = 'Accent')\n# 自定义调色方案\ncol <- c('darkred','skyblue','purple')\nggplot(data = df, mapping =aes(x = factor(x), y = z, fill = y)) + geom_bar(stat = 'identity', colour= 'black', position = 'dodge') +scale_fill_manual(values = col,limits= c('B','C','A')) + xlab('x')\n# 按z值的大小，重新排列条形图的顺序，只需将aes()中x的属性用reorder()函数\nggplot(data = df, mapping = aes(x = reorder(x, z), y = z, fill = y)) +geom_bar(stat = 'identity') + xlab('x')\n\n# 添加标签\n# 堆叠粗壮柱形图\nggplot(data = df, mapping = aes(x = x, y = z, fill = y)) + geom_bar(stat\n                                                                    = 'identity', position = 'stack') + geom_text(mapping = aes(label = z),\n                                                                                                                 size = 5, colour = 'black', vjust = 3.5, hjust = .5, position = position_stack())\n#分开粗壮柱形图 \nggplot(data = df, mapping = aes(x = x, y = z, fill = y)) + geom_bar(stat\n                                                                    = 'identity', position = 'dodge') + geom_text(mapping = aes(label = z),\n                                                                                                                  size = 5, colour = 'black', vjust = 1, hjust = .5, position = position_dodge(0.9))\n\nggplot(data = df, mapping = aes(x = interaction(x,y),\n                               y = z, fill = y)) + geom_bar(stat = 'identity') + geom_text(mapping = aes(label= z))\n",
+    "created" : 1536674638138.000,
+    "dirty" : false,
+    "encoding" : "CP936",
+    "folds" : "",
+    "hash" : "664307520",
+    "id" : "81DA1139",
+    "lastKnownWriteTime" : 1536719258,
+    "last_content_update" : 1536719258,
+    "path" : "E:/Rworkspace/DemoR/machineLearning/Gglot2_Demo.R",
+    "project_path" : "Gglot2_Demo.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
