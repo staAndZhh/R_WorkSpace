@@ -7,7 +7,7 @@ library(lubridate)
 # before deal----
 con <- dbConnect(MySQL(),host="127.0.0.1",dbname="smnews",user="root",password="") 
 dbSendQuery(con,'SET NAMES gbk')
-history_tem <- as.data.table(dbReadTable(con,'history_tem'))
+history_tem <- as.data.table(dbReadTable(con,'history_tem_jiaodui'))
 str(history_tem)
 history_tem[,":="(ave_tm = as.numeric(ave_tm),max_tm = as.numeric(max_tm),min_tm = as.numeric(min_tm)),]
 history_tem[,":="(provi=NULL,area=NULL,s_area=NULL,area_name = NULL),]
@@ -20,13 +20,16 @@ ppb_city <- fread('C:\\Users\\hasee\\Desktop\\ppb.txt',encoding = 'UTF-8')
 history_tem <- history_tem %>% left_join(ppb_city,by=c('city')) %>% as.data.table()
 history_tem[is.na(area),,]
 history_tem[,.N,year]
+history_tem[provi == '#N/A',.N,city]
+history_tem[provi == '#N/A',":="(provi = '内蒙古',area='华北大区',s_area='北一',area_name = '锡林郭勒'),]
+
 # data----
 day_provi_normal_season <- history_tem[(ymd>=20150101)&(ymd<=20171231)&(!provi%in%c("台湾","香港","澳门")),.(ave_tm  = mean(ave_tm,na.rm = TRUE)),.(ymd,provi,area)][order(area,provi,ymd)]
 day_provi_normal_season <- day_provi_normal_season[provi!="",,]
 day_provi_normal_season[,":="(md = str_sub(ymd,5,8),month = str_sub(ymd,5,6)),]
 day_provi_normal_season <- day_provi_normal_season[md!='0229',,]
 day_provi_normal_season <- day_provi_normal_season[provi!='?????',,] 
-
+history_tem[provi == '#N/A',,]
 
 
 day_provi_normal_season[provi=='?????',,]
@@ -55,6 +58,7 @@ mean_day_provi_normal_season[,":="(spring_sep = (if_else(sma_five >=10&sma_five<
                                    winter_sep = (if_else(sma_five <10,1,0,0))
 ),.(area,provi)]  # count season
 
+# 0.75*0.75
 # test <- cut(c(10,20,30,40),breaks = c(-Inf,10,22,Inf),labels=c('winter','spring-autter','summer'),ordered = TRUE)
 
 mean_day_provi_normal_season[,":="(sma_five_cut = base::cut(sma_five,breaks = c(-Inf,10,22,Inf),labels=c('winter','spring-autter','summer'),ordered = TRUE)),]
