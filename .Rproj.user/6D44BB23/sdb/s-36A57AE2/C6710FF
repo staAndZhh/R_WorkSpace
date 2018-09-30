@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# entropy\n#  info  gain  ID3\n#  info gain rate  C4.5\n#  gini CART  \n# key:divide property\n",
+    "created" : 1538190292325.000,
+    "dirty" : false,
+    "encoding" : "CP936",
+    "folds" : "",
+    "hash" : "2287509957",
+    "id" : "C6710FF",
+    "lastKnownWriteTime" : 1538199273,
+    "last_content_update" : 1538199273595,
+    "path" : "E:/Rworkspace/DemoR/machineLearning/decisionTree_Demo.R",
+    "project_path" : "decisionTree_Demo.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

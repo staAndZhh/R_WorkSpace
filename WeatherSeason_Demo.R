@@ -41,7 +41,11 @@ day_provi_normal_season[md=='0229',.N,md]
 # tem_var[,.N,cut_ave]
 # rm(tem_var)
 
+# weather three years 
 mean_day_provi_normal_season <- day_provi_normal_season[,.(ave_tm = mean(ave_tm,na.rm = TRUE)),.(md,month,provi,area)][order(area,provi,md,month)]
+# waether one years
+mean_day_provi_normal_season <- day_provi_normal_season[ymd>='',.(ave_tm = mean(ave_tm,na.rm = TRUE)),.(md,month,provi,area)][order(area,provi,md,month)]
+
 setcolorder(mean_day_provi_normal_season,c('area','provi','md','month','ave_tm'))
 mean_day_provi_normal_season <- mean_day_provi_normal_season[,,][order(area,provi,md,month)]
 mean_day_provi_normal_season <- mean_day_provi_normal_season[,":="(sma_five = (SMA(ave_tm,n=5))),.(area,provi)]  # average five 

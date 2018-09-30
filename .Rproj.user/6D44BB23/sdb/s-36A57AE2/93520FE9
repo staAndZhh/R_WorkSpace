@@ -1,14 +1,14 @@
 {
     "collab_server" : "",
-    "contents" : "# lm\ndata(women)\nlm.model <- lm(weight~height-1,data = women)\nsummary(lm.model)\ncoefficients(lm.model) # 参数估计值\nconfint(lm.model,parm = 'speed',level = 0.95)\nfitted(lm.model) # 模型的预测值\nanova(lm.model) # 方差分析\nvcov(lm.model) # 协方差\nresiduals(lm.model) # 模型残差\ninfluence(lm.model)\nAIC(lm.model)\npar(mfrow = c(2,2))\nplot(lm.model) # 评价拟合的诊断图\n# predict\nnewdata <- data.frame(height = c(110,120,130))\npredict(lm.model,newdata)\n\n# lm\ndata(\"anscombe\")\nplot(y2~x1,data = anscombe)\nlmfit2 <- lm(y2~poly(x1,2),data = anscombe)\nlines(sort(anscombe$x1),lmfit2$fitted.values[order(anscombe$x1)],col = 'red')\n\ngetwd()\n",
+    "contents" : "# lm demo1 \ndata(women)\nlm.model <- lm(weight~height-1,data = women)\nsummary(lm.model)\ncoefficients(lm.model) # 参数估计值\nconfint(lm.model,parm = 'speed',level = 0.95)\nfitted(lm.model) # 模型的预测值\nanova(lm.model) # 方差分析\nvcov(lm.model) # 协方差\nresiduals(lm.model) # 模型残差\ninfluence(lm.model)\nAIC(lm.model)\npar(mfrow = c(2,2))\nplot(lm.model) # 评价拟合的诊断图\n# predict\nnewdata <- data.frame(height = c(110,120,130))\npredict(lm.model,newdata)\n\n# lm\ndata(\"anscombe\")\nplot(y2~x1,data = anscombe)\nlmfit2 <- lm(y2~poly(x1,2),data = anscombe)\nlines(sort(anscombe$x1),lmfit2$fitted.values[order(anscombe$x1)],col = 'red')\n\n# lm demo2\nhouse <- read.csv('house_rental.csv',header = TRUE)\nlmfit <- lm(Price~Sqft,data = house)\nplot(Price~Sqft,data = house)\nabline(lmfit,col = 'red')\n\nnewdata <- data.frame(Sqft = c(800,900,1000))\npredict(lmfit,newdata)\nlmfit$coefficients[1]\nlmfit$coefficients[2]\nc(800,900,1000)*lmfit$coefficients[2]+ lmfit$coefficients[1]\npredict(lmfit,newdata,interval = 'prediction')\nplot(Price~Sqft,data = house)\npred.res <- predict(lmfit,data = house,interval = 'prediction')\npred.conf <- predict(lmfit,data = house,interval = 'confidence')\nlines(pred.conf[,'fit']~house$Sqft,col = 'red',lty = 1, lwd = 3)\nlines(pred.conf[,'lwr']~house$Sqft,col = 'blue',lty = 3, lwd = 3)\nlines(pred.conf[,'upr']~house$Sqft,col = 'blue',lty = 3, lwd = 3)\nlines(pred.conf[,'lwr']~house$Sqft,col = 'green',lty = 3, lwd = 3)\nlines(pred.conf[,'upr']~house$Sqft,col = 'green',lty = 3, lwd = 3)\n\n\npredicted <- predict(lmfit,data = house)\n",
     "created" : 1537755557998.000,
     "dirty" : false,
     "encoding" : "CP936",
     "folds" : "",
-    "hash" : "1481486843",
+    "hash" : "3005656157",
     "id" : "93520FE9",
-    "lastKnownWriteTime" : 1537954935,
-    "last_content_update" : 1537954935649,
+    "lastKnownWriteTime" : 1537957559,
+    "last_content_update" : 1537957559779,
     "path" : "E:/Rworkspace/DemoR/machineLearning/Line_Demo.R",
     "project_path" : "Line_Demo.R",
     "properties" : {
