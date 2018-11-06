@@ -20,3 +20,13 @@ summary(teens$age)
 
 interests <- teens[5:40]
 interests_z <- as.data.frame(lapply(interests,scale))
+
+teen_clusters <- kmeans(interests_z,5)
+teen_clusters$size
+teen_clusters$centers
+
+teens$cluster <- teen_clusters$cluster
+teens[1:5,c('cluster','gender','age','friends')]
+aggregate(data =teens,age~cluster,mean)
+aggregate(data = teens,female~cluster,mean)
+aggregate(data = teens,friends~cluster,mean)
