@@ -2,7 +2,7 @@
 normalize <- function(x){
   return((x-min(x))/(max(x)-min(x)))
 }
-
+as.data.frame(lapply(data,normalize))
 # z-score
 data_z <- scale(data)
 # data_train <-
